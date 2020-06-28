@@ -33,24 +33,22 @@ class BackendsPool(object):
         Returns the list of payment backends, as instances, from the list of
         backends defined in settings.SHOP_PAYMENT_BACKENDS
         """
-        if self._payment_backends_list and self.use_cache:
-            return self._payment_backends_list
-        else:
+        if not (self._payment_backends_list and self.use_cache):
             self._payment_backends_list = self._load_backends_list(
                 self.PAYMENT, self.PAYMENT_SHOP_INTERFACE)
-            return self._payment_backends_list
+
+        return self._payment_backends_list
 
     def get_shipping_backends_list(self):
         """
         Returns the list of shipping backends, as instances, from the list of
         backends defined in settings.SHOP_SHIPPING_BACKENDS
         """
-        if self._shippment_backends_list and self.use_cache:
-            return self._shippment_backends_list
-        else:
+        if not (self._shippment_backends_list and self.use_cache):
             self._shippment_backends_list = self._load_backends_list(
                 self.SHIPPING, self.SHIPPING_SHOP_INTERFACE)
-            return self._shippment_backends_list
+
+        return self._shippment_backends_list
 
     def _check_backend_for_validity(self, backend_instance):
         """

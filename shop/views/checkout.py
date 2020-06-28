@@ -28,9 +28,8 @@ class CheckoutSelectionView(LoginMixin, ShopTemplateView):
         """
         Returns a dynamic ModelForm from the loaded AddressModel
         """
-        form_class = model_forms.modelform_factory(
+        return model_forms.modelform_factory(
             AddressModel, exclude=['user_shipping', 'user_billing'])
-        return form_class
 
     def get_shipping_form_class(self):
         """

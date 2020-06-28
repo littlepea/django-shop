@@ -19,8 +19,7 @@ class TenPercentGlobalTaxModifier(BaseCartModifier):
         Add a field on cart.extra_price_fields:
         """
         taxes = (self.TAX_PERCENTAGE / 100) * cart.current_total
-        result_tuple = ('Taxes total', taxes)
-        return result_tuple
+        return 'Taxes total', taxes
 
 
 class TenPercentPerItemTaxModifier(BaseCartModifier):
@@ -37,5 +36,4 @@ class TenPercentPerItemTaxModifier(BaseCartModifier):
     def get_extra_cart_item_price_field(self, cart_item):
         tax_amount = (self.TAX_PERCENTAGE / 100) * cart_item.current_total
 
-        result_tuple = ('Taxes (10%)', tax_amount)
-        return result_tuple
+        return 'Taxes (10%)', tax_amount

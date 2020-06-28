@@ -10,12 +10,18 @@ from shop.models.cartmodel import CartItem
 
 def get_shipping_backends_choices():
     shipping_backends = backends_pool.get_shipping_backends_list()
-    return tuple([(x.url_namespace, getattr(x, 'backend_verbose_name', x.backend_name)) for x in shipping_backends])
+    return tuple(
+        (x.url_namespace, getattr(x, 'backend_verbose_name', x.backend_name))
+        for x in shipping_backends
+    )
 
 
 def get_billing_backends_choices():
     billing_backends = backends_pool.get_payment_backends_list()
-    return tuple([(x.url_namespace, getattr(x, 'backend_verbose_name', x.backend_name)) for x in billing_backends])
+    return tuple(
+        (x.url_namespace, getattr(x, 'backend_verbose_name', x.backend_name))
+        for x in billing_backends
+    )
 
 
 class BillingShippingForm(forms.Form):
@@ -44,9 +50,8 @@ class CartItemModelForm(forms.ModelForm):
         items from the cart when the quantity is set to 0.
         """
         quantity = self.cleaned_data['quantity']
-        instance = self.instance.cart.update_quantity(self.instance.pk,
+        return self.instance.cart.update_quantity(self.instance.pk,
                 quantity)
-        return instance
 
 
 def get_cart_item_formset(cart_items=None, data=None):

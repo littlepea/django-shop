@@ -28,11 +28,7 @@ def get_order_from_request(request):
     user or session mode) if any.
     """
     orders = get_orders_from_request(request)
-    if orders and len(orders) >= 1:
-        order = orders[0]
-    else:
-        order = None
-    return order
+    return orders[0] if orders and len(orders) >= 1 else None
 
 
 def add_order_to_request(request, order):

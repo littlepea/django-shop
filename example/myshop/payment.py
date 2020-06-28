@@ -37,8 +37,7 @@ class ExamplePayment(object):
         return HttpResponseRedirect(self.shop.get_finished_url())
 
     def get_urls(self):
-        urlpatterns = patterns('',
+        return patterns('',
             url(r'^$', self.show_payment, name='example-payment'),
             url(r'^$', self.process_payment, name='process-payment'),
         )
-        return urlpatterns

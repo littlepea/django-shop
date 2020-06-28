@@ -4,10 +4,7 @@ from django.contrib.auth.models import AnonymousUser
 
 def get_cart_from_database(request):
     database_cart = Cart.objects.filter(user=request.user)
-    if database_cart:
-        database_cart = database_cart[0]
-    else:
-        database_cart = None
+    database_cart = database_cart[0] if database_cart else None
     return database_cart
 
 def get_cart_from_session(request):
@@ -43,7 +40,7 @@ def get_or_create_cart(request, save=False):
             if session_cart and session_cart.user == request.user:
                 # and the session cart already belongs to us, we are done
                 cart = session_cart
-            elif session_cart and session_cart.total_quantity > 0 and session_cart.user != request.user:
+            elif session_cart and session_cart.total_quantity > 0:
                 # if it does not belong to us yet
                 database_cart = get_cart_from_database(request)
                 if database_cart:

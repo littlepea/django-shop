@@ -58,8 +58,7 @@ class FlatRateShipping(object):
         """
         Return the list of URLs defined here.
         """
-        urlpatterns = patterns('',
+        return patterns('',
             url(r'^$', self.view_display_fees, name='flat'),
             url(r'^process/$', self.view_process_order, name='flat_process'),
         )
-        return urlpatterns

@@ -141,7 +141,7 @@ class CartViewTestCase(TestCase):
 
     def assertCartHasItems(self, expected):
         cart = self.get_cart()
-        count = sum([cart_item.quantity for cart_item in cart.items.all()])
+        count = sum(cart_item.quantity for cart_item in cart.items.all())
         self.assertEqual(count, expected)
 
     def test_cart(self):

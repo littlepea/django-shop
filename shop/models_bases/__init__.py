@@ -149,12 +149,10 @@ class BaseCart(models.Model):
         if item.exists() and merge:
             cart_item = item[0]
             cart_item.quantity = cart_item.quantity + int(quantity)
-            cart_item.save()
         else:
             cart_item = CartItem.objects.create(
                 cart=self, quantity=quantity, product=product)
-            cart_item.save()
-
+        cart_item.save()
         return cart_item
 
     def update_quantity(self, cart_item_id, quantity):
@@ -262,7 +260,7 @@ class BaseCart(models.Model):
         """
         Returns the total quantity of all items in the cart
         """
-        return sum([ci.quantity for ci in self.items.all()])
+        return sum(ci.quantity for ci in self.items.all())
 
 
 class BaseCartItem(models.Model):

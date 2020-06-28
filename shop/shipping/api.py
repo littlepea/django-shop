@@ -38,10 +38,6 @@ class ShippingAPI(ShopAPI):
             eopf.value = value
             eopf.save()
 
-            # Re-add the shipping costs to the total
-            order.order_total = order.order_total + value
-            order.save()
-
         else:
             # In this case, there was no shipping cost already associated with
             # the order - let's simply create a new one (theat should be the
@@ -50,8 +46,10 @@ class ShippingAPI(ShopAPI):
                                                 label=label,
                                                 value=value,
                                                 is_shipping=True)
-            order.order_total = order.order_total + value
-            order.save()
+
+        # Re-add the shipping costs to the total
+        order.order_total = order.order_total + value
+        order.save()
 
     def finished(self, order):
         """

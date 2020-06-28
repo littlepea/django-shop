@@ -12,7 +12,7 @@ class CartModifiersPool(object):
         self._modifiers_list = []
 
     def get_modifiers_list(self):
-        if not self.USE_CACHE or not self._modifiers_list:
+        if not (self.USE_CACHE and self._modifiers_list):
             self._modifiers_list = self._load_modifiers_list()
         return self._modifiers_list
 

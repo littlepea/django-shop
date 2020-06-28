@@ -69,10 +69,9 @@ def assign_address_to_request(request, address, shipping=True):
         # There is a logged-in user here.
         if shipping:
             address.user_shipping = request.user
-            address.save()
         else:
             address.user_billing = request.user
-            address.save()
+        address.save()
     else:
         # The client is a guest - let's use the session instead.  There has to
         # be a session. Otherwise it's fine to get an AttributeError
